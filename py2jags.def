@@ -7,12 +7,13 @@ Stage: build
     export LC_ALL=C
 
 %post
-	 NOW=`date`
-    echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
+	NOW=`date`
+	echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
 
 	apt-get install software-properties-common -y
 	apt-get update
 	add-apt-repository universe
+	add-apt-repository ppa:deadsnakes/ppa
 
    	echo "deb http://ppa.launchpad.net/cidlab/jwm/ubuntu yakkety main" >> /etc/apt/sources.list 
 	echo "deb-src http://ppa.launchpad.net/cidlab/jwm/ubuntu yakkety main" >> /etc/apt/sources.list 
@@ -20,7 +21,7 @@ Stage: build
 
 	apt-get update
 
-    apt-get install -y jags jags-wiener-module python3.9 -y
+	apt-get install -y git jags jags-wiener-module python3.9 -y
 
 	git clone https://github.com/jtjanecek/py2jags
 
@@ -31,17 +32,17 @@ Stage: build
     exec echo "$@"
 
 %test
-    grep -q NAME=\"Ubuntu\" /etc/os-release
-    if [ $? -eq 0 ]; then
-        echo "Container base is Ubuntu as expected."
-    else
-        echo "Container base is not Ubuntu."
-        exit 1
-    fi
+	grep -q NAME=\"Ubuntu\" /etc/os-release
+	if [ $? -eq 0 ]; then
+		echo "Container base is Ubuntu as expected."
+	else
+		echo "Container base is not Ubuntu."
+		exit 1
+	fi
 
 %labels
-    Author John Janecek
-    Version v0.0.1
+	Author John Janecek
+	Version v0.0.1
 
 %help
 	This container is to run JAGS with the Python helper wrapper
