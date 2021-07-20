@@ -24,6 +24,8 @@ Stage: build
 	apt-get install -y git jags jags-wiener-module python3.9 -y
 
 	git clone https://github.com/jtjanecek/py2jags
+	cd py2jags
+	python3.9 -m pip install -r requirements.txt
 
 %runscript
     echo "Container was created $NOW"
