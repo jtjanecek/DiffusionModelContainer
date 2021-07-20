@@ -28,8 +28,9 @@ Stage: build
 	python3 -m pip install -r requirements.txt
 
 %runscript
+	cd /py2jags/code
 	echo "Container was created $NOW"
-	echo $LISTEN_PORT
+	pwd
 	echo "Arguments received: $*"
 	exec echo "$@"
 
