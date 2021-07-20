@@ -21,17 +21,17 @@ Stage: build
 
 	apt-get update
 
-	apt-get install -y git jags jags-wiener-module python3.9 -y
+	apt-get install -y git jags jags-wiener-module python3-pip -y
 
 	git clone https://github.com/jtjanecek/py2jags
-	cd py2jags
-	python3.9 -m pip install -r requirements.txt
+	cd py2jags/code
+	python3 -m pip install -r requirements.txt
 
 %runscript
-    echo "Container was created $NOW"
+	echo "Container was created $NOW"
 	echo $LISTEN_PORT
-    echo "Arguments received: $*"
-    exec echo "$@"
+	echo "Arguments received: $*"
+	exec echo "$@"
 
 %test
 	grep -q NAME=\"Ubuntu\" /etc/os-release
