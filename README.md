@@ -2,16 +2,14 @@
 To get access to the DiffusionModel repo, contact John Janecek.
 https://github.com/jtjanecek/DiffusionModel
 
-# Installation
+## Installation
 ```
 git clone git@github.com:jtjanecek/DiffusionModelContainer.git
 sudo singularity build diffusion.simg DiffusionModelContainer/DiffusionModelRecipe.def
 rm -rf DiffusionModelContainer
 ```
 
-# Executing
-Write a script that utilizes the DiffusionModel library.
-
+## Executing a model script
 Recommended folder structure:
 ```
 diffusion_folder
@@ -28,8 +26,8 @@ diffusion_folder
 
 Example running a script
 ```
-singularity run -B workdir:/workdir,code:/code,data:/data diffusion.simg code/script.py
+singularity run -B workdir:/workdir,code:/code,data:/data diffusion.simg code/script_1.py
 ```
 
-# What do I put in the python script?
+## What do I put in the python script?
 Follow the instructions here: https://github.com/jtjanecek/DiffusionModel
