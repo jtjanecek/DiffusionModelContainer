@@ -8,22 +8,17 @@ From: ubuntu:20.04
 	exec python3 $1
 
 %environment
-
     VARIABLE=MEATBALLVALUE
-
     export VARIABLE
-
 
 %labels
    AUTHOR janecektyler@gmail.com
 
 %post
-	#NOW=`date`
-	#echo "export NOW=\"${NOW}\"" >> $SINGULARITY_ENVIRONMENT
-
 	apt-get update
 	apt-get install git -y
-	echo " Enter your GitHub username and token to install the Python DiffusionModel lib"
+	
+	# Install the DiffusionModel code
 	git clone https://github.com/jtjanecek/DiffusionModel
 
 	apt-get install software-properties-common -y
@@ -35,7 +30,7 @@ From: ubuntu:20.04
 	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8982B0C0FB2FA51DCAEBF21479D1BE170F2A3BF9
 
 	apt-get update
-
+	
 	apt-get install -y jags jags-wiener-module python3-pip -y
 
 	cd DiffusionModel/
