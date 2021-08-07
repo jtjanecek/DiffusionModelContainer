@@ -3,7 +3,9 @@ From: ubuntu:20.04
 
 %runscript
 	echo "Arguments received: $*"
-	exec echo "$@"
+	echo "$@"
+	echo "Executing python3 $1"
+	exec python3 $1
 
 %environment
 
