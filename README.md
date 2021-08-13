@@ -1,5 +1,5 @@
 # DiffusionModelContainer
-This document is an all inclusive guide on how to run hierarchical Bayesian diffusion modeling for detecting group differences based on the models written for the Old/Young group comparison project. This code is inspired by the  [Trinity MATLAB toolbox](https://github.com/joachimvandekerckhove/trinity) adapted to Python and containerized in order to better parallelize and to execute on high computing clusters.
+This document is an all inclusive guide on how to run hierarchical Bayesian diffusion modeling for detecting group differences based on the models written for the Old/Young group comparison project. This code is inspired by the  [Trinity MATLAB toolbox](https://github.com/joachimvandekerckhove/trinity) adapted to Python and containerized in order to better parallelize and to execute on high computing clusters. This container uses [JAGS](https://en.wikipedia.org/wiki/Just_another_Gibbs_sampler) as the MCMC sampler.
 
 ## Getting Started
 First, read a few papers on diffusion modeling in order to understand the parameters and assumptions. It will be important to understand the basics of hierarchical diffusion modeling. Recommended readings: 
@@ -17,7 +17,9 @@ Third, you will need to have Singularity installed. This is the only software re
 
 
 ## Repo structure
-This repo contains the [Singularity](https://sylabs.io/guides/3.5/user-guide/introduction.html) definition file for building a Singularity image. This container pulls from the [Python Diffusion Model base code repo](https://github.com/jtjanecek/DiffusionModel). You will mount your python code into the Singularity image to run it. If you don't have access to that repo, contact John Janecek. You will need your github credentials to access the Python repo when you build the image.
+This repo contains the [Singularity](https://sylabs.io/guides/3.5/user-guide/introduction.html) definition file for building a Singularity image. This container pulls from the [Python Diffusion Model base code repo](https://github.com/jtjanecek/DiffusionModel). This container will containerize Python, JAGS, and jags-wiener-module. 
+
+If you don't have access to the Python repo, contact John Janecek. You will need your github credentials to access the Python repo when you build the image.
 
 ## Setting up your data
 You will need to format your data in a way that the model can read it. For the GroupComparison models, you will need the following CSVs:
