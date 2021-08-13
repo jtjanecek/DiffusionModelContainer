@@ -13,7 +13,7 @@ Second, you'll need to understand some basics about MCMC simulation and Bayesian
 	- [Michael Lee](https://faculty.sites.uci.edu/mdlee/bgm/) (Bayesian modeling)
 	- [Joachim Vandekerckhove](https://www.faculty.uci.edu/profile.cfm?faculty_id=6237) (Bayesian modeling, Diffusion modeling)
 
-Third, you will need to have Singularity installed. This is the only software requirements needed.
+Third, you will need to have Singularity installed. This is the only software requirement needed.
 
 
 ## Repo structure
@@ -33,19 +33,11 @@ You will need to format your data in a way that the model can read it. For the G
 [Example randomly generated data](https://github.com/jtjanecek/DiffusionModel/tree/master/example_inputs)
 
 
-First download 
+## Set up your directory structure
 ```
-git clone git@github.com:jtjanecek/DiffusionModelContainer.git
-sudo singularity build diffusion.simg DiffusionModelContainer/DiffusionModelRecipe.def
-rm -rf DiffusionModelContainer
-```
-
-## Executing a model script
-Recommended folder structure:
-```
-diffusion_folder
-|-- diffusion.simg
+project_folder
 |-- code
+|    |-- diffusion.simg
 |    |-- script_1.py 
 |    |-- script_2.py
 |-- data
@@ -53,7 +45,20 @@ diffusion_folder
 |    |-- groups.csv
 |    |-- rts.csv 
 |-- workdir
+|    |-- # This is where the models will be stored and executed
 ```
+Right now you won't have anything in your code and workdir folders, but we will change that next. 
+
+## Executing a model script
+First download 
+```
+git clone git@github.com:jtjanecek/DiffusionModelContainer.git
+sudo singularity build diffusion.simg DiffusionModelContainer/DiffusionModelRecipe.def
+rm -rf DiffusionModelContainer
+```
+
+
+
 
 Example running a script
 ```
