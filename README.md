@@ -3,8 +3,8 @@ This document is an all inclusive guide on how to run hierarchical Bayesian diff
 
 ## Getting Started
 First, read a few papers on diffusion modeling in order to understand the parameters and assumptions. It will be important to understand the basics of hierarchical diffusion modeling. Recommended readings: 
-- Paper 1
-- Paper 2
+- [Hierarchical diffusion models for two-choice response times.](https://lirias.kuleuven.be/retrieve/157366)
+- [A Bayesian approach to diffusion models of decision-making and response time](https://digital.library.adelaide.edu.au/dspace/bitstream/2440/68612/2/hdl_68612.pdf)
 
 Second, you'll need to understand some basics about MCMC simulation and Bayesian statistics. Recommended resources:
 - https://www.youtube.com/watch?v=OTO1DygELpY&t=3s
