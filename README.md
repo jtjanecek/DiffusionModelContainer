@@ -10,8 +10,8 @@ Second, you'll need to understand some basics about MCMC simulation and Bayesian
 - https://www.youtube.com/watch?v=OTO1DygELpY&t=3s
 - [Bayesian Cognitive Modeling: A Practical Course](https://bayesmodels.com/)
 - UCI Bayesian Experts:
-	- [Michael Lee](https://faculty.sites.uci.edu/mdlee/bgm/) (Bayesian modeling)
-	- [Joachim Vandekerckhove](https://www.faculty.uci.edu/profile.cfm?faculty_id=6237) (Bayesian modeling, Diffusion modeling)
+        - [Michael Lee](https://faculty.sites.uci.edu/mdlee/bgm/) (Bayesian modeling)
+        - [Joachim Vandekerckhove](https://www.faculty.uci.edu/profile.cfm?faculty_id=6237) (Bayesian modeling, Diffusion modeling)
 
 Third, you will need to have Singularity installed. This is the only software requirement needed.
 
@@ -66,15 +66,52 @@ project_folder
 |-- workdir
 |    |-- # This is where the models will be stored and executed
 ```
-R
+## Python Script to execute your code
+You will be writing Python scripts to execute your code. Your new singularity compiled image, `diffusion.simg`, is only the environment for executing your Python scripts (with everything installed already!). The Python scripts will be responsible for telling the container what to execute. All paths within your Python scripts must be the paths based on the container. [Python code documentation](docs). [Example Python script that the image can run](test)
 
+## Running the Singularity Image
+The image requires you to mount your code, data, and workdir folders. It will also require you to pass in the name of the Python script you want to execute.  
 
-Example running a script
+Example running a script while in the `project_folder`:
 ```
-singularity run -B workdir:/workdir,code:/code,data:/data diffusion.simg code/script_1.py
+singularity run -B workdir:/workdir,code:/code,data:/data code/diffusion.simg /code/run.py
+```
+Code breakdown:
+```
+# Runs the singularity image
+singularity run 
+# This binds directories in your computer into the image. This will bind the local workdir directory to /workdir in the container, etc
+-B workdir:/workdir,code:/code,data:/data 
+# The singularity image
+code/diffusion.simg 
+# The path (in the container) to the Python script you want to execute
+/code/run.py
+```
+## Example SLURM script for the Stark Grid
+Notes: 
+- Change the `6` in `#SBATCH -c 6` to be the number of chains (so that the container can properly parallelize)
+```
+#!/bin/bash
+# Setup qsub options
+#  Nothing needed for this
+#SBATCH -c 6
+#SBATCH -o /mnt/yassamri2/MDTO-Diffusion/young_vs_old/code/logs/dm-%j.out
+#SBATCH --partition=large
+#SBATCH -w wario02
+
+# Change directory to your project folder
+cd /mnt/yassamri2/MDTO-Diffusion/young_vs_old/
+echo Job ID: $SLURM_JOB_ID
+echo Job name: $SLURM_JOB_NAME
+echo Submit host: $SLURM_SUBMIT_HOST
+echo "Node(s) used": $SLURM_JOB_NODELIST
+echo "CPUS PER TASK: $SLURM_CPUS_PER_TASK"
+echo "CPUS PER TASK: $SLURM_NPROCS"
+
+# Run the code
+singularity run -B workdir:/workdir,code:/code,data:/data code/diffusion.simg /code/run.py
 ```
 
-## What do I put in the python script?
-Follow the instructions here: https://github.com/jtjanecek/DiffusionModel
+
 
 
