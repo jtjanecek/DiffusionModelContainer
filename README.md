@@ -37,9 +37,7 @@ You will need to format your data in a way that the model can read it. For the G
 ```
 project_folder
 |-- code
-|    |-- diffusion.simg
-|    |-- script_1.py 
-|    |-- script_2.py
+|    |-- # This is where the container and code will be stored
 |-- data
 |    |-- conditions.csv 
 |    |-- groups.csv
@@ -49,15 +47,26 @@ project_folder
 ```
 Right now you won't have anything in your code and workdir folders, but we will change that next. 
 
-## Executing a model script
-First download 
+## Downloading and building the Singularity Image
 ```
+cd code
 git clone git@github.com:jtjanecek/DiffusionModelContainer.git
 sudo singularity build diffusion.simg DiffusionModelContainer/DiffusionModelRecipe.def
 rm -rf DiffusionModelContainer
 ```
-
-
+Your directory structure will now look like:
+```
+project_folder
+|-- code
+|    |-- diffusion.simg
+|-- data
+|    |-- conditions.csv 
+|    |-- groups.csv
+|    |-- rts.csv 
+|-- workdir
+|    |-- # This is where the models will be stored and executed
+```
+R
 
 
 Example running a script
