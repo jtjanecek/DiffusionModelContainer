@@ -30,7 +30,7 @@ You will need to format your data in a way that the model can read it. For the G
 | Conditions     | Yes            | Yes         | The condition for this trial                                            | Integer, starting at 1                                                  |
 | Reaction times | Yes            | Yes         | The reaction time. Positive = upper boundary, negative = lower boundary | Decimal, in seconds. Bounds are [-max_reaction_time,+max_reaction_time] |
 
-[Example randomly generated data](https://github.com/jtjanecek/DiffusionModel/tree/master/example_inputs)
+[Example randomly generated data](https://github.com/jtjanecek/DiffusionModel/tree/master/example/data)
 
 
 ## Set up your directory structure
@@ -67,7 +67,7 @@ project_folder
 |    |-- # This is where the models will be stored and executed
 ```
 ## Python Script to execute your code
-You will be writing Python scripts to execute your code. Your new singularity compiled image, `diffusion.simg`, is only the environment for executing your Python scripts (with everything installed already!). The Python scripts will be responsible for telling the container what to execute. All paths within your Python scripts must be the paths based on the container. [Python code documentation](https://github.com/jtjanecek/DiffusionModel). [Example Python script that the image can run](test)
+You will be writing Python scripts to execute your code. Your new singularity compiled image, `diffusion.simg`, is only the environment for executing your Python scripts (with everything installed already!). The Python scripts will be responsible for telling the container what to execute. All paths within your Python scripts must be the paths based on the container. [Python code documentation](https://github.com/jtjanecek/DiffusionModel). [Example Python script that the image can run](https://github.com/jtjanecek/DiffusionModel/blob/master/example/code/run.py)
 
 ## Running the Singularity Image
 The image requires you to mount your code, data, and workdir folders. It will also require you to pass in the name of the Python script you want to execute.  
